@@ -4,9 +4,9 @@ const { v4: uuid } = require('uuid');
 const moment = require('moment');
 const RefreshToken = require('../../resources/refreshToken/refreshToken.schema');
 
-// const { SECRET_JWT_KEY } = require('../../config');
+const { SECRET_JWT_KEY } = require('../../config');
 
-const secretKey = process.env.SECRET_JWT_KEY;
+// const secretKey = process.env.SECRET_JWT_KEY;
 
 const generateAccessTokenAndRefreshTokenForUser = async (user, jwtId) => {
   const refreshToken = new RefreshToken();
@@ -31,7 +31,7 @@ const generateAccessTokenAndRefreshToken = async (user) => {
 
   const jwtId = uuid();
 
-  const accessToken = jwt.sign(payload, secretKey, {
+  const accessToken = jwt.sign(payload, SECRET_JWT_KEY, {
     expiresIn: '5m',
     jwtid: jwtId, // needed for the refresh token, as a refresh token only points to one single unique token
     subject: user.id.toString()
@@ -49,7 +49,7 @@ const getJwtValueByKey = (token, key) => {
 
 const isValidToken = (token, ignoreExpiration) => {
   try {
-    return jwt.verify(token, secretKey, {
+    return jwt.verify(token, SECRET_JWT_KEY, {
       ignoreExpiration
     });
   } catch (err) {
