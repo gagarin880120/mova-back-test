@@ -1,8 +1,8 @@
 const express = require('express');
-// const YAML = require('yamljs');
-// const path = require('path');
+const YAML = require('yamljs');
+const path = require('path');
 
-// const swaggerUI = require('swagger-ui-express');
+const swaggerUI = require('swagger-ui-express');
 
 const { errorLoggerMiddleware } = require('./middlewares/loggerMiddleware');
 const { errorMiddleware } = require('./middlewares/errorMiddleware');
@@ -13,10 +13,10 @@ const { errorMiddleware } = require('./middlewares/errorMiddleware');
 
 const app = express();
 
-// const swaggerDocument = YAML.load(path.join(__dirname, '../doc/api.yaml'));
+const swaggerDocument = YAML.load(path.join(__dirname, '../doc/api.yaml'));
 
 app.use(express.json());
-// app.use('/doc', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
+app.use('/doc', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 
 app.use('/', (req, res, next) => {
   if (req.originalUrl === '/') {
