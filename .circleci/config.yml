@@ -2,9 +2,10 @@ version: 2.1
 orbs:
   heroku: circleci/heroku@0.0.10
 jobs:
-  - run:
-    name: Copy across app.yaml config
-    command: ./app.yaml.sh > ./app.yaml
+  steps:
+    - run:
+      name: Copy across app.yaml config
+      command: ./app.yaml.sh > ./app.yaml
 workflows:
   heroku_deploy:
     jobs:
