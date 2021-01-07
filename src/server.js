@@ -1,63 +1,66 @@
-// // const mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
-// // const { PORT, MONGO_DB_CONNECTION_URL } = require('./config');
-// const { processErrorLogger } = require('./middlewares/loggerMiddleware');
-// // const getConsoleLog = require('./utils/getConsoleLog');
+const express = require('express');
+
+// const { PORT, MONGO_DB_CONNECTION_URL } = require('./config');
+const { processErrorLogger } = require('./middlewares/loggerMiddleware');
+const getConsoleLog = require('./utils/getConsoleLog');
 
 // const app = require('./app');
+const app = express();
 
-// process
-//   .on('unhandledRejection', (err) => {
-//     processErrorLogger(err.message, 'Unhandled Rejection');
-//   })
-//   .on('uncaughtException', (err) => {
-//     const logger = processErrorLogger(err.message, 'Uncaught Exception');
-//     const { exit } = process;
-//     logger.on('finish', () => exit(1));
-//   });
+process
+  .on('unhandledRejection', (err) => {
+    processErrorLogger(err.message, 'Unhandled Rejection');
+  })
+  .on('uncaughtException', (err) => {
+    const logger = processErrorLogger(err.message, 'Uncaught Exception');
+    const { exit } = process;
+    logger.on('finish', () => exit(1));
+  });
 
-// // const connectDb = () => {
-// //   const db = mongoose.connection;
-// //   db.on('error', (err) => {
-// //     getConsoleLog('err', err);
-// //   });
-// //   db.once('connected', () => {
-// //     getConsoleLog('mongoose is connected');
-// //   });
-// //   return mongoose.connect(
-// //     'mongodb+srv://admin:G8G2Bfs5cBepEdr@cluster-mova-data-base.bnb39.mongodb.net/mova-data-base-user?retryWrites=true&w=majority',
-// //     {
-// //       useNewUrlParser: true,
-// //       useUnifiedTopology: true
-// //     }
-// //   );
-// // };
+const connectDb = () => {
+  const db = mongoose.connection;
+  db.on('error', (err) => {
+    getConsoleLog('err', err);
+  });
+  db.once('connected', () => {
+    getConsoleLog('mongoose is connected');
+  });
+  return mongoose.connect(
+    'mongodb+srv://admin:G8G2Bfs5cBepEdr@cluster-mova-data-base.bnb39.mongodb.net/mova-data-base-user?retryWrites=true&w=majority',
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true
+    }
+  );
+};
 
-// const port = process.env.PORT || '1337';
+const port = process.env.PORT || '1337';
 
 // app.listen(port, () => console.log(`Server running on localhost:${port}`));
 
-// // try {
-// //   connectDb().then(() => {
-// //     app.listen(port, () => {
-// //       getConsoleLog(`app is listening to PORT ${port}`);
-// //     });
-// //   });
-// // } catch (err) {
-// //   getConsoleLog('err', err.message);
-// // }
+try {
+  connectDb().then(() => {
+    app.listen(port, () => {
+      getConsoleLog(`app is listening to PORT ${port}`);
+    });
+  });
+} catch (err) {
+  getConsoleLog('err', err.message);
+}
 
-const express = require('express');
-const routes = require('./routes');
+// ========================================================================================
+// const express = require('express');
+// const routes = require('./routes');
+// // App
+// const app = express();
 
-// App
-const app = express();
+// // Set port
+// const port = process.env.PORT || '1337';
+// app.set('port', port);
 
-// Set port
-const port = process.env.PORT || '1337';
-app.set('port', port);
+// app.use('/', routes);
 
-app.use('/', routes);
-
-// Server
-app.listen(port, () => console.log(`Server running on localhost:${port}`));
+// // Server
+// app.listen(port, () => console.log(`Server running on localhost:${port}`));
