@@ -1,13 +1,13 @@
 const mongoose = require('mongoose');
 
-const express = require('express');
+// const express = require('express');
 
 // const { PORT, MONGO_DB_CONNECTION_URL } = require('./config');
 const { processErrorLogger } = require('./middlewares/loggerMiddleware');
 const getConsoleLog = require('./utils/getConsoleLog');
 
-// const app = require('./app');
-const app = express();
+const app = require('./app');
+// const app = express();
 
 process
   .on('unhandledRejection', (err) => {
