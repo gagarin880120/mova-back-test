@@ -1,13 +1,10 @@
 const mongoose = require('mongoose');
 
-// const express = require('express');
-
 // const { PORT, MONGO_DB_CONNECTION_URL } = require('./config');
 const { processErrorLogger } = require('./middlewares/loggerMiddleware');
 const getConsoleLog = require('./utils/getConsoleLog');
 
 const app = require('./app');
-// const app = express();
 
 process
   .on('unhandledRejection', (err) => {
@@ -38,8 +35,6 @@ const connectDb = () => {
 
 const port = process.env.PORT || '1337';
 
-// app.listen(port, () => console.log(`Server running on localhost:${port}`));
-
 try {
   connectDb().then(() => {
     app.listen(port, () => {
@@ -49,18 +44,3 @@ try {
 } catch (err) {
   getConsoleLog('err', err.message);
 }
-
-// ========================================================================================
-// const express = require('express');
-// const routes = require('./routes');
-// // App
-// const app = express();
-
-// // Set port
-// const port = process.env.PORT || '1337';
-// app.set('port', port);
-
-// app.use('/', routes);
-
-// // Server
-// app.listen(port, () => console.log(`Server running on localhost:${port}`));

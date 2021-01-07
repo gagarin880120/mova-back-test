@@ -1,18 +1,10 @@
 version: 2.1
 orbs:
-  dotenv: anilanar/dotenv@volatile
-jobs:
-  build:
-    docker:
-      - image: 'circleci/node:8.17'
-    working_directory: ~/repo
-    steps:
-      - checkout
-      - dotenv/source:
-          path: .env
-      - run: make build
-orbs:
   heroku: circleci/heroku@0.0.10
+jobs:
+  - run:
+    name: Copy across app.yaml config
+    command: ./app.yaml.sh > ./app.yaml
 workflows:
   heroku_deploy:
     jobs:
