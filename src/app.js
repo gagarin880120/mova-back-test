@@ -7,7 +7,7 @@ const swaggerUI = require('swagger-ui-express');
 const { errorLoggerMiddleware } = require('./middlewares/loggerMiddleware');
 const { errorMiddleware } = require('./middlewares/errorMiddleware');
 
-// const userRouter = require('./resources/user/user.router');
+const userRouter = require('./resources/user/user.router');
 const profileRouter = require('./resources/profile/profile.router');
 const wordRouter = require('./resources/word/word.router');
 
@@ -26,7 +26,7 @@ app.use('/', (req, res, next) => {
   next();
 });
 
-// app.use('/api', userRouter);
+app.use('/api', userRouter);
 app.use('/api/profiles', profileRouter);
 app.use('/api/word', wordRouter);
 app.use(errorMiddleware);
