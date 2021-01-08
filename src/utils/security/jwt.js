@@ -6,7 +6,8 @@ const RefreshToken = require('../../resources/refreshToken/refreshToken.schema')
 
 const { SECRET_JWT_KEY } = require('../../config');
 
-const secretKey = process.env.CIRCLE_JOB ? process.env.SECRET_JWT_KEY : SECRET_JWT_KEY;
+const secretKey =
+  process.env.NODE_ENV === 'production' ? process.env.SECRET_JWT_KEY : SECRET_JWT_KEY;
 console.log(secretKey);
 // const secretKey = process.env.SECRET_JWT_KEY;
 
