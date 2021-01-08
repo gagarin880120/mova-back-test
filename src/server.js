@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const { PORT /* MONGO_DB_CONNECTION_URL */ } = require('./config');
+const { PORT, MOB_URL } = require('./config');
 const { processErrorLogger } = require('./middlewares/loggerMiddleware');
 const getConsoleLog = require('./utils/getConsoleLog');
 
@@ -24,13 +24,10 @@ const connectDb = () => {
   db.once('connected', () => {
     getConsoleLog('mongoose is connected');
   });
-  return mongoose.connect(
-    'mongodb+srv://admin:G8G2Bfs5cBepEdr@cluster-mova-data-base.bnb39.mongodb.net/mova-data-base-user?retryWrites=true&w=majority',
-    {
-      useNewUrlParser: true,
-      useUnifiedTopology: true
-    }
-  );
+  return mongoose.connect(MOB_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  });
 };
 
 try {
