@@ -32,9 +32,7 @@ const connectDb = () => {
     }
   );
 };
-
-const port = process.env.PORT || '1337';
-
+const port = process.env.PORT || '4400';
 try {
   connectDb().then(() => {
     app.listen(port, () => {
