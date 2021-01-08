@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-// const { PORT, MONGO_DB_CONNECTION_URL } = require('./config');
+const { PORT /* MONGO_DB_CONNECTION_URL */ } = require('./config');
 const { processErrorLogger } = require('./middlewares/loggerMiddleware');
 const getConsoleLog = require('./utils/getConsoleLog');
 
@@ -32,7 +32,7 @@ const connectDb = () => {
     }
   );
 };
-const { PORT } = process.env;
+
 try {
   connectDb().then(() => {
     app.listen(PORT, () => {
