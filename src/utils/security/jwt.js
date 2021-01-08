@@ -4,9 +4,9 @@ const { v4: uuid } = require('uuid');
 const moment = require('moment');
 const RefreshToken = require('../../resources/refreshToken/refreshToken.schema');
 
-const { SECRET_JWT_KEY } = require('../../config');
+// const { SECRET_JWT_KEY } = require('../../config');
 
-const secretKey = SECRET_JWT_KEY;
+const secretKey = process.env.SECRET_JWT_KEY;
 
 const generateAccessTokenAndRefreshTokenForUser = async (user, jwtId) => {
   const refreshToken = new RefreshToken();

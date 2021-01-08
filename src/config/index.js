@@ -8,10 +8,11 @@ const {
   DATA_BASE_NAME,
   DATA_BASE_PASSWORD,
   DATA_BASE_USERNAME,
-  MONGO_DB_CONNECTION_URL = `mongodb+srv://${DATA_BASE_USERNAME}:${DATA_BASE_PASSWORD}@cluster-mova-data-base.bnb39.mongodb.net/${DATA_BASE_NAME}?retryWrites=true&w=majority`,
   IN_PROD = MODE !== 'prod',
   SECRET_JWT_KEY
 } = process.env;
+
+const MONGO_DB_CONNECTION_URL = `mongodb+srv://${DATA_BASE_USERNAME}:${DATA_BASE_PASSWORD}@cluster-mova-data-base.bnb39.mongodb.net/${DATA_BASE_NAME}?retryWrites=true&w=majority`;
 
 module.exports = {
   PORT,
