@@ -1,6 +1,6 @@
-const { config } = require('dotenv');
+// const { config } = require('dotenv');
 
-const { parsed } = config();
+// const { parsed } = config();
 
 const {
   PORT,
@@ -11,7 +11,7 @@ const {
   MONGO_DB_CONNECTION_URL = `mongodb+srv://${DATA_BASE_USERNAME}:${DATA_BASE_PASSWORD}@cluster-mova-data-base.bnb39.mongodb.net/${DATA_BASE_NAME}?retryWrites=true&w=majority`,
   IN_PROD = MODE !== 'prod',
   SECRET_JWT_KEY
-} = parsed;
+} = process.env;
 
 module.exports = {
   PORT,
