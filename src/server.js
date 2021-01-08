@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const { PORT, MOB_URL } = require('./config');
+const { PORT, DATA_BASE_USERNAME, DATA_BASE_PASSWORD, DATA_BASE_NAME } = require('./config');
 const { processErrorLogger } = require('./middlewares/loggerMiddleware');
 const getConsoleLog = require('./utils/getConsoleLog');
 
@@ -16,6 +16,8 @@ process
     logger.on('finish', () => exit(1));
   });
 
+const MONGO_DB_CONNECTION_URL = `mongodb+srv://${DATA_BASE_USERNAME}:${DATA_BASE_PASSWORD}@cluster-mova-data-base.bnb39.mongodb.net/${DATA_BASE_NAME}?retryWrites=true&w=majority`;
+
 const connectDb = () => {
   const db = mongoose.connection;
   db.on('error', (err) => {
@@ -24,7 +26,7 @@ const connectDb = () => {
   db.once('connected', () => {
     getConsoleLog('mongoose is connected');
   });
-  return mongoose.connect(MOB_URL, {
+  return mongoose.connect(MONGO_DB_CONNECTION_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true
   });
