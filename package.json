@@ -8,8 +8,8 @@
   },
   "scripts": {
     "lint": "eslint . --fix",
-    "start": "node index.js",
-    "dev": "nodemon ."
+    "start": "cross-env NODE_ENV=development node index.js",
+    "dev": "cross-env NODE_ENV=development nodemon ."
   },
   "repository": {
     "type": "git",
@@ -24,6 +24,7 @@
   "homepage": "https://github.com/mova-back/mova-back#readme",
   "dependencies": {
     "bcrypt": "^5.0.0",
+    "cross-env": "^7.0.3",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
